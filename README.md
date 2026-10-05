@@ -4,9 +4,20 @@ Compile editable business configuration into consistent, validated JSON using Py
 
 Configuration teams often hand-maintain factors, weights, dropdown values, and score bands. Small errors such as overlapping ranges or weights that do not total 100% can make a configuration ambiguous. This project validates those controls before producing a versioned output contract.
 
-## Current milestone
+## Run the interface
 
-A command-line generator accepting JSON or Excel inputs, with four fictional commercial-credit factors, business validation, repeatable sample output, and automated tests. Python 3.10+. JSON generation uses no third-party dependencies; Excel import uses openpyxl and standalone output validation uses jsonschema.
+```bash
+python -m pip install -r requirements.txt
+python -m streamlit run app.py
+```
+
+Open the local URL printed in your terminal. Click **Try fictional example** for a quick demo, or download the template, edit it in Excel, and upload the saved workbook. The interface validates inputs and output, previews the factors and rules, and enables JSON download after all checks pass.
+
+See [the interface guide](docs/interface.md) for setup and a short demo walkthrough. The app is runnable from this repository; a public hosted demo has not been deployed.
+
+## Command-line workflows
+
+A Streamlit interface and command-line generator accepting JSON or Excel inputs, with four fictional commercial-credit factors, business validation, repeatable sample output, and automated tests. Python 3.10+. JSON generation uses no third-party dependencies; Excel import uses openpyxl and standalone output validation uses jsonschema.
 
 ```bash
 python src/generator.py examples/sample_input.json examples/generated_config.json
@@ -21,7 +32,7 @@ python src/validate_config.py examples/generated_config.json
 python -m unittest discover -s tests -v
 ```
 
-Run both commands from the repository root. Edit `examples/sample_input.json` to change the model, weights, or rules, then regenerate the output. Invalid inputs produce an error and leave existing output unchanged. The output directory must already exist.
+Run the commands from the repository root. Edit `examples/sample_input.json` to change the model, weights, or rules, then regenerate the output. Invalid inputs produce an error and leave existing output unchanged. The output directory must already exist.
 
 ## Excel workflow
 
@@ -67,6 +78,8 @@ Numeric bands include their minimum and exclude their maximum. `null` represents
 
 | Path | Purpose |
 | --- | --- |
+| `app.py` | Upload, preview, validation errors, and download interface |
+| `src/app_service.py` | In-memory workbook processing and output validation |
 | `src/generator.py` | Validation and output compilation |
 | `src/excel_importer.py` | Excel adapter reusing the same compiler |
 | `examples/sample_input.xlsx` | Editable Excel template |
@@ -83,7 +96,8 @@ Numeric bands include their minimum and exclude their maximum. `null` represents
 1. **Complete:** JSON input, Python compiler, validation, sample output, and tests.
 2. **Complete:** Excel input template and import adapter.
 3. **Complete:** Formal JSON Schema and independent output validation.
-4. Simple interface for upload, error review, and download.
+4. **Complete:** Interface for upload, error review, sample demo, and download.
+5. Public demo hosting and portfolio walkthrough polish.
 
 ## Portfolio context
 

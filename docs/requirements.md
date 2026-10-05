@@ -58,3 +58,14 @@ The MVP demonstrates predictable output and detection of invalid configurations 
 - The CLI rejects duplicate JSON keys and nonstandard numeric constants.
 - Invalid output yields exit code 1 with field locations; valid output yields exit code 0.
 - Validation never modifies the supplied file.
+
+## Interface acceptance criteria
+
+- The initial page offers an Excel template and a fictional example.
+- Generation is disabled when no workbook is selected.
+- Both sample and upload flows perform input compilation and independent output validation.
+- Successful results show factor/rule counts, total weight, factor and rule previews, JSON text, and a JSON download.
+- Invalid uploads display an error and no generated-file download.
+- Changing or removing an upload clears previous results.
+- A corrected upload can recover from an earlier failure.
+- The service never writes uploaded files to disk and enforces documented file/archive limits.
