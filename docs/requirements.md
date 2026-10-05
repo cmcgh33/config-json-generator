@@ -6,7 +6,7 @@ As a configuration analyst, I want to define weighted factors and scoring rules 
 
 ## MVP scope
 
-One model per file. Numeric and categorical factors. Configurable weights and scores. A command-line workflow. Input is JSON for this milestone; Excel import is planned.
+One model per file. Numeric and categorical factors. Configurable weights and scores. A command-line workflow. Input can be JSON or the documented Excel template. Both paths share the same validation and output contract.
 
 ## Mapping
 
@@ -37,3 +37,13 @@ Higher scores represent higher risk. Units are explicit: LTV and debt yield use 
 ## Success measurement
 
 The MVP demonstrates predictable output and detection of invalid configurations through automated tests. No time savings or error-reduction percentages have been measured. A later user trial could compare manual assembly time and error counts against the generator.
+
+## Excel acceptance criteria
+
+- The sample workbook produces the same configuration values as sample JSON. Numeric spellings such as 1 and 1.0 may differ after Excel import, but have the same JSON numeric meaning.
+- Sheet names and row 5 headers match the template contract.
+- Unknown rule factor IDs and incompatible rule columns are rejected with cell locations.
+- Blank numeric endpoints become null; numeric zero remains zero.
+- Formula and error cells are rejected in importable inputs.
+- Editing valid weights flows through to normalized output weights.
+- New factors and rules can be appended through row 1005.

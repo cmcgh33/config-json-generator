@@ -6,14 +6,25 @@ Configuration teams often hand-maintain factors, weights, dropdown values, and s
 
 ## Current milestone
 
-A command-line generator with four fictional commercial-credit factors, business validation, repeatable sample output, and automated tests. Python 3.10+; no third-party dependencies.
+A command-line generator accepting JSON or Excel inputs, with four fictional commercial-credit factors, business validation, repeatable sample output, and automated tests. Python 3.10+. JSON generation uses no third-party dependencies; Excel import uses openpyxl.
 
 ```bash
 python src/generator.py examples/sample_input.json examples/generated_config.json
+```
+
+For Excel input and the full test suite:
+
+```bash
+python -m pip install -r requirements.txt
+python src/excel_importer.py examples/sample_input.xlsx examples/generated_config.json
 python -m unittest discover -s tests -v
 ```
 
 Run both commands from the repository root. Edit `examples/sample_input.json` to change the model, weights, or rules, then regenerate the output. Invalid inputs produce an error and leave existing output unchanged. The output directory must already exist.
+
+## Excel workflow
+
+Download [the editable Excel template](examples/sample_input.xlsx). Change the amber input cells in **Model**, **Factors**, and **Rules**, save the workbook, then run the Excel command above. See [the workbook guide](docs/excel-template.md) for columns, boundary rules, and examples.
 
 ## Example transformation
 
@@ -46,6 +57,8 @@ Numeric bands include their minimum and exclude their maximum. `null` represents
 | Path | Purpose |
 | --- | --- |
 | `src/generator.py` | Validation and output compilation |
+| `src/excel_importer.py` | Excel adapter reusing the same compiler |
+| `examples/sample_input.xlsx` | Editable Excel template |
 | `examples/sample_input.json` | Editable fictional business inputs |
 | `examples/generated_config.json` | Reproducible output |
 | `tests/test_generator.py` | Business controls and failure behavior |
@@ -55,7 +68,7 @@ Numeric bands include their minimum and exclude their maximum. `null` represents
 ## Roadmap
 
 1. **Complete:** JSON input, Python compiler, validation, sample output, and tests.
-2. Excel input template and import adapter.
+2. **Complete:** Excel input template and import adapter.
 3. Formal JSON Schema and independent output validation.
 4. Simple interface for upload, error review, and download.
 
