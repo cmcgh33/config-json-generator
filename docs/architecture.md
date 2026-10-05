@@ -13,7 +13,7 @@ Business validation is stricter than JSON parsing: syntactically valid input can
 - Generates configuration; no borrower evaluation, grade assignment, calibration, or model performance claims.
 - Excel import uses openpyxl only to read workbook inputs; the compiler stays independent of that dependency.
 - The Streamlit interface calls an in-memory workbook service, then displays only validated results.
-- No public hosted demo or third-party consumer integration yet.
+- The public demo is hosted at https://carla-config-generator.streamlit.app/ on Streamlit Community Cloud. No third-party consumer integration is implemented.
 - The workbook total is a convenience check; the compiler remains authoritative for all business controls.
 - Excel input supports 1,000 data rows per table, literal cells only, and the three documented sheets.
 - Input compilation reports the first failure. Output validation reports multiple structural errors, or multiple business errors once the structure passes.
