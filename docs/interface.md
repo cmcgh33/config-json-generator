@@ -1,5 +1,9 @@
 # Interface guide
 
+## Open the hosted app
+
+[Launch the live demo](https://carla-config-generator.streamlit.app/) in your browser, then follow the quick demo below. No local installation is needed.
+
 ## Start locally
 
 Install Python 3.10 or newer. Download this repository using GitHub's **Code → Download ZIP**, extract it, then open a terminal in the extracted project folder.
@@ -32,7 +36,7 @@ Changing or removing the uploaded file clears the previous result. The sample bu
 
 Uploads are limited to 5 MB. Expanded archives must stay within 20 MB and 300 entries. The existing workbook contract supports 1,000 data rows per input table. Both input and output validation must pass before a generated-file download is displayed.
 
-The application processes uploaded files in server memory and does not write them to disk or store them in a database. If deployed on another machine, uploads are transferred to that server. The current repository does not include a public deployment.
+The application processes uploaded files in server memory and does not write them to disk or store them in a database. In the hosted demo, uploads are transferred to the Streamlit server for processing.
 
 ## Interview walkthrough
 
@@ -43,3 +47,5 @@ Explain the manual configuration problem, run the fictional example, and show th
 Streamlit AppTest covers initial, example, uploaded, invalid, changed-file, cleared-file, and recovery states. Service tests verify the actual downloadable JSON, its output validation, and file/archive limits. The full suite runs in GitHub Actions.
 
 The local Streamlit server startup and health endpoint were verified. A full browser visual pass was not completed because the browser executable could not be downloaded in the execution environment.
+
+On October 5, 2026, the owner deployed the app to Streamlit Community Cloud and supplied screenshots showing the rendered interface and a successful uploaded workbook with four factors, twelve rules, and 100% total weight. Hosted download and invalid-input checks have not yet been confirmed.
