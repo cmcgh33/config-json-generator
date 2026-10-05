@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0",
+  "model": {
+    "id": "demo_cre_risk",
+    "name": "Fictional CRE Risk Configuration"
+  },
+  "scoring": {
+    "range": [
+      0,
+      100
+    ],
+    "higher_score": "higher_risk",
+    "numeric_bounds": "min_inclusive_max_exclusive"
+  },
+  "factors": [
+    {
+      "id": "dscr",
+      "label": "Debt Service Coverage Ratio",
+      "type": "numeric",
+      "unit": "ratio",
+      "weight": 0.4,
+      "rules": [
+        {
+          "min": null,
+          "max": 1.0,
+          "score": 85
+        },
+        {
+          "min": 1.0,
+          "max": 1.4,
+          "score": 45
+        },
+        {
+          "min": 1.4,
+          "max": null,
+          "score": 15
+        }
+      ]
+    },
+    {
+      "id": "ltv",
+      "label": "Loan to Value",
+      "type": "numeric",
+      "unit": "percent",
+      "weight": 0.3,
+      "rules": [
+        {
+          "min": null,
+          "max": 55,
+          "score": 15
+        },
+        {
+          "min": 55,
+          "max": 75,
+          "score": 45
+        },
+        {
+          "min": 75,
+          "max": null,
+          "score": 85
+        }
+      ]
+    },
+    {
+      "id": "debt_yield",
+      "label": "Debt Yield",
+      "type": "numeric",
+      "unit": "percent",
+      "weight": 0.2,
+      "rules": [
+        {
+          "min": null,
+          "max": 7,
+          "score": 85
+        },
+        {
+          "min": 7,
+          "max": 11,
+          "score": 45
+        },
+        {
+          "min": 11,
+          "max": null,
+          "score": 15
+        }
+      ]
+    },
+    {
+      "id": "property_type",
+      "label": "Property Type",
+      "type": "categorical",
+      "unit": "category",
+      "weight": 0.1,
+      "rules": [
+        {
+          "value": "Office",
+          "score": 65
+        },
+        {
+          "value": "Industrial",
+          "score": 25
+        },
+        {
+          "value": "Retail",
+          "score": 45
+        }
+      ]
+    }
+  ]
+}

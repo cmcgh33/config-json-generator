@@ -1,0 +1,99 @@
+{
+  "model_id": "demo_cre_risk",
+  "model_name": "Fictional CRE Risk Configuration",
+  "factors": [
+    {
+      "id": "dscr",
+      "label": "Debt Service Coverage Ratio",
+      "type": "numeric",
+      "unit": "ratio",
+      "weight_percent": 40,
+      "rules": [
+        {
+          "min": null,
+          "max": 1.0,
+          "score": 85
+        },
+        {
+          "min": 1.0,
+          "max": 1.4,
+          "score": 45
+        },
+        {
+          "min": 1.4,
+          "max": null,
+          "score": 15
+        }
+      ]
+    },
+    {
+      "id": "ltv",
+      "label": "Loan to Value",
+      "type": "numeric",
+      "unit": "percent",
+      "weight_percent": 30,
+      "rules": [
+        {
+          "min": null,
+          "max": 55,
+          "score": 15
+        },
+        {
+          "min": 55,
+          "max": 75,
+          "score": 45
+        },
+        {
+          "min": 75,
+          "max": null,
+          "score": 85
+        }
+      ]
+    },
+    {
+      "id": "debt_yield",
+      "label": "Debt Yield",
+      "type": "numeric",
+      "unit": "percent",
+      "weight_percent": 20,
+      "rules": [
+        {
+          "min": null,
+          "max": 7,
+          "score": 85
+        },
+        {
+          "min": 7,
+          "max": 11,
+          "score": 45
+        },
+        {
+          "min": 11,
+          "max": null,
+          "score": 15
+        }
+      ]
+    },
+    {
+      "id": "property_type",
+      "label": "Property Type",
+      "type": "categorical",
+      "unit": "category",
+      "weight_percent": 10,
+      "rules": [
+        {
+          "value": "Office",
+          "score": 65
+        },
+        {
+          "value": "Industrial",
+          "score": 25
+        },
+        {
+          "value": "Retail",
+          "score": 45
+        }
+      ]
+    }
+  ]
+}
