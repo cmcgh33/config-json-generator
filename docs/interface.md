@@ -48,4 +48,4 @@ Streamlit AppTest covers initial, example, uploaded, invalid, changed-file, clea
 
 The local Streamlit server startup and health endpoint were verified. A full browser visual pass was not completed because the browser executable could not be downloaded in the execution environment.
 
-On October 5, 2026, the owner deployed the app to Streamlit Community Cloud and supplied screenshots showing the rendered interface and a successful uploaded workbook with four factors, twelve rules, and 100% total weight. Hosted download and invalid-input checks have not yet been confirmed.
+On October 5, 2026, the owner deployed the app to Streamlit Community Cloud and supplied screenshots showing the rendered interface and a successful uploaded workbook with four factors, twelve rules, and 100% total weight. A later screenshot confirmed that a workbook with total weight 95 was rejected with the expected error and no generated JSON download. The owner also shared matching generated JSON; the hosted download action itself has not been explicitly confirmed.
