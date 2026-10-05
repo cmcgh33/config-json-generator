@@ -6,7 +6,7 @@ Configuration teams often hand-maintain factors, weights, dropdown values, and s
 
 ## Current milestone
 
-A command-line generator accepting JSON or Excel inputs, with four fictional commercial-credit factors, business validation, repeatable sample output, and automated tests. Python 3.10+. JSON generation uses no third-party dependencies; Excel import uses openpyxl.
+A command-line generator accepting JSON or Excel inputs, with four fictional commercial-credit factors, business validation, repeatable sample output, and automated tests. Python 3.10+. JSON generation uses no third-party dependencies; Excel import uses openpyxl and standalone output validation uses jsonschema.
 
 ```bash
 python src/generator.py examples/sample_input.json examples/generated_config.json
@@ -17,6 +17,7 @@ For Excel input and the full test suite:
 ```bash
 python -m pip install -r requirements.txt
 python src/excel_importer.py examples/sample_input.xlsx examples/generated_config.json
+python src/validate_config.py examples/generated_config.json
 python -m unittest discover -s tests -v
 ```
 
@@ -25,6 +26,16 @@ Run both commands from the repository root. Edit `examples/sample_input.json` to
 ## Excel workflow
 
 Download [the editable Excel template](examples/sample_input.xlsx). Change the amber input cells in **Model**, **Factors**, and **Rules**, save the workbook, then run the Excel command above. See [the workbook guide](docs/excel-template.md) for columns, boundary rules, and examples.
+
+## Validate a received file
+
+```bash
+python src/validate_config.py examples/generated_config.json
+```
+
+This command reads the output without running the generator or modifying the file. It checks the versioned JSON Schema, then checks weight totals, unique IDs, categorical duplicates, and numeric range continuity. Errors identify the field, such as `$.factors[0].rules[1]`, and return exit code 1.
+
+Generation and output validation are separate commands. Run both to demonstrate the complete workflow. See [the validation guide](docs/validation.md) for details and schema limitations.
 
 ## Example transformation
 
@@ -61,7 +72,9 @@ Numeric bands include their minimum and exclude their maximum. `null` represents
 | `examples/sample_input.xlsx` | Editable Excel template |
 | `examples/sample_input.json` | Editable fictional business inputs |
 | `examples/generated_config.json` | Reproducible output |
-| `tests/test_generator.py` | Business controls and failure behavior |
+| `schemas/config_schema.json` | Version 1.0 output contract, JSON Schema Draft 2020-12 |
+| `src/validate_config.py` | Standalone structure and business validation |
+| `tests/` | Generator, Excel import, and output validation controls |
 | `docs/requirements.md` | Scope, mappings, and acceptance criteria |
 | `docs/architecture.md` | Design decisions and limitations |
 
@@ -69,7 +82,7 @@ Numeric bands include their minimum and exclude their maximum. `null` represents
 
 1. **Complete:** JSON input, Python compiler, validation, sample output, and tests.
 2. **Complete:** Excel input template and import adapter.
-3. Formal JSON Schema and independent output validation.
+3. **Complete:** Formal JSON Schema and independent output validation.
 4. Simple interface for upload, error review, and download.
 
 ## Portfolio context

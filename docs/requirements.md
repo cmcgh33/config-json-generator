@@ -47,3 +47,14 @@ The MVP demonstrates predictable output and detection of invalid configurations 
 - Formula and error cells are rejected in importable inputs.
 - Editing valid weights flows through to normalized output weights.
 - New factors and rules can be appended through row 1005.
+
+## Output contract acceptance criteria
+
+- The version 1.0 schema conforms to JSON Schema Draft 2020-12.
+- Both JSON-generated and Excel-generated configurations pass the standalone validator.
+- Missing fields, unknown fields, incompatible rule structures, wrong versions, and incorrect scoring conventions fail structural validation.
+- Normalized weights total 1 within an absolute tolerance of 1e-12 for floating-point serialization.
+- Duplicate IDs/categories, gaps, overlaps, reversed ranges, and incorrect open endpoints fail business validation.
+- The CLI rejects duplicate JSON keys and nonstandard numeric constants.
+- Invalid output yields exit code 1 with field locations; valid output yields exit code 0.
+- Validation never modifies the supplied file.

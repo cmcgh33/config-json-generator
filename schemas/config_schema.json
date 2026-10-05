@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/cmcgh33/config-json-generator/raw/main/schemas/config_schema.json",
+  "title": "Config JSON Generator output, version 1.0",
+  "description": "Output structure. Weight totals, unique IDs, and numeric band continuity require additional business validation.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "model": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "name": {
+          "$ref": "#/$defs/text"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "additionalProperties": false
+    },
+    "scoring": {
+      "type": "object",
+      "properties": {
+        "range": {
+          "type": "array",
+          "const": [
+            0,
+            100
+          ],
+          "items": {
+            "type": "number"
+          }
+        },
+        "higher_score": {
+          "const": "higher_risk"
+        },
+        "numeric_bounds": {
+          "const": "min_inclusive_max_exclusive"
+        }
+      },
+      "required": [
+        "range",
+        "higher_score",
+        "numeric_bounds"
+      ],
+      "additionalProperties": false
+    },
+    "factors": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/factor"
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "model",
+    "scoring",
+    "factors"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "\\S"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "not": {
+        "pattern": "[\\r\\n]"
+      }
+    },
+    "score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "bound": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "numericRule": {
+      "type": "object",
+      "properties": {
+        "min": {
+          "$ref": "#/$defs/bound"
+        },
+        "max": {
+          "$ref": "#/$defs/bound"
+        },
+        "score": {
+          "$ref": "#/$defs/score"
+        }
+      },
+      "required": [
+        "min",
+        "max",
+        "score"
+      ],
+      "additionalProperties": false
+    },
+    "categoricalRule": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "$ref": "#/$defs/text"
+        },
+        "score": {
+          "$ref": "#/$defs/score"
+        }
+      },
+      "required": [
+        "value",
+        "score"
+      ],
+      "additionalProperties": false
+    },
+    "factor": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/id"
+        },
+        "label": {
+          "$ref": "#/$defs/text"
+        },
+        "type": {
+          "enum": [
+            "numeric",
+            "categorical"
+          ]
+        },
+        "unit": {
+          "$ref": "#/$defs/text"
+        },
+        "weight": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "rules": {
+          "type": "array",
+          "minItems": 1
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "type",
+        "unit",
+        "weight",
+        "rules"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "type": {
+                "const": "numeric"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "rules": {
+                "items": {
+                  "$ref": "#/$defs/numericRule"
+                }
+              }
+            }
+          },
+          "else": {
+            "properties": {
+              "rules": {
+                "items": {
+                  "$ref": "#/$defs/categoricalRule"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
