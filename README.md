@@ -4,7 +4,13 @@ Compile editable business configuration into consistent, validated JSON using Py
 
 Configuration teams often hand-maintain factors, weights, dropdown values, and score bands. Small errors such as overlapping ranges or weights that do not total 100% can make a configuration ambiguous. This project validates those controls before producing a versioned output contract.
 
-## Run the interface
+## Try the live demo
+
+[Open Config JSON Generator](https://carla-config-generator.streamlit.app/)
+
+Click **Try fictional example** to explore the four-factor configuration immediately, or upload an edited Excel template and download the validated JSON. No local installation is needed to try the hosted demo.
+
+## Run the interface locally
 
 ```bash
 python -m pip install -r requirements.txt
@@ -13,7 +19,7 @@ python -m streamlit run app.py
 
 Open the local URL printed in your terminal. Click **Try fictional example** for a quick demo, or download the template, edit it in Excel, and upload the saved workbook. The interface validates inputs and output, previews the factors and rules, and enables JSON download after all checks pass.
 
-See [the interface guide](docs/interface.md) for setup and a short demo walkthrough. The app is runnable from this repository; a public hosted demo has not been deployed.
+See [the interface guide](docs/interface.md) for setup and a short demo walkthrough. The app is also hosted on Streamlit Community Cloud at the live demo link above.
 
 ## Command-line workflows
 
@@ -97,7 +103,8 @@ Numeric bands include their minimum and exclude their maximum. `null` represents
 2. **Complete:** Excel input template and import adapter.
 3. **Complete:** Formal JSON Schema and independent output validation.
 4. **Complete:** Interface for upload, error review, sample demo, and download.
-5. Public demo hosting and portfolio walkthrough polish.
+5. **Complete:** Public demo hosting on Streamlit Community Cloud.
+6. Portfolio walkthrough polish.
 
 ## Portfolio context
 
