@@ -10,6 +10,16 @@ Configuration teams often hand-maintain factors, weights, dropdown values, and s
 
 Click **Try fictional example** to explore the four-factor configuration immediately, or upload an edited Excel template and download the validated JSON. No local installation is needed to try the hosted demo.
 
+## Review the project in two minutes
+
+1. Open the live demo and choose **Try fictional example**.
+2. Review the factor weights and numeric bands, then download the generated JSON.
+3. Read the [requirements and acceptance criteria](docs/requirements.md) and [validation controls](docs/validation.md) to see how the business rules become checks.
+
+**Business analysis evidence:** documented mappings, acceptance criteria, boundary conventions, error handling, and a versioned output contract. Automated tests run on pushes and pull requests.
+
+[![Tests](https://github.com/cmcgh33/config-json-generator/actions/workflows/tests.yml/badge.svg)](https://github.com/cmcgh33/config-json-generator/actions/workflows/tests.yml)
+
 ## Run the interface locally
 
 ```bash
@@ -104,7 +114,7 @@ Numeric bands include their minimum and exclude their maximum. `null` represents
 3. **Complete:** Formal JSON Schema and independent output validation.
 4. **Complete:** Interface for upload, error review, sample demo, and download.
 5. **Complete:** Public demo hosting on Streamlit Community Cloud.
-6. Portfolio walkthrough polish.
+6. **Complete:** Portfolio walkthrough and links to requirements and validation evidence.
 
 ## Portfolio context
 
